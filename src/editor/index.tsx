@@ -1,8 +1,8 @@
 import { Allotment } from "allotment";
 import "allotment/dist/style.css";
 import { Header } from "./components/Header";
-import { Material } from "./components/Materail";
-import { EditArea } from "./components/EditArea";
+import { Material } from "./components/Material/index.tsx";
+import { EditArea } from "./components/EditArea/index.tsx";
 import { Setting } from "./components/Setting";
 
 export default function LowcodeEditor() {
