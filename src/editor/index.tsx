@@ -3,7 +3,7 @@ import "allotment/dist/style.css";
 import { Header } from "./components/Header";
 import { Material } from "./components/Material/index.tsx";
 import { EditArea } from "./components/EditArea/index.tsx";
-import { Setting } from "./components/Setting";
+import { Setting } from "./components/Setting/index.tsx";
 
 export default function LowcodeEditor() {
 	return (
