@@ -1,4 +1,5 @@
 import React, { useEffect, useState, type MouseEventHandler } from "react";
+import HoverMask from "../HoverMask";
 import { useComponentConfigStore } from "../../stores/component-config";
 import { useComponentsStore } from "../../stores/components";
 import type { Component } from "../../stores/components";
@@ -40,9 +41,22 @@ export function EditArea() {
 	};
 
 	return (
-		<div className="h-[100%]" onMouseOver={handleMouseOver}>
-			{hoverComponentId}
+		<div
+			className="h-[100%] edit-area"
+			onMouseOver={handleMouseOver}
+			onMouseLeave={() => {
+				setHoverComponentId(undefined);
+			}}
+		>
 			{renderComponents(components)}
+			{hoverComponentId && (
+				<HoverMask
+					portalWrapperClassName="portal-wrapper"
+					containerClassName="edit-area"
+					componentId={hoverComponentId}
+				></HoverMask>
+			)}
+			<div className="portal-wrapper"></div>
 			{/* <pre>{JSON.stringify(components, null, 2)}</pre> */}
 		</div>
 	);
