@@ -3,8 +3,9 @@ import HoverMask from "../HoverMask";
 import { useComponentConfigStore } from "../../stores/component-config";
 import { useComponentsStore } from "../../stores/components";
 import type { Component } from "../../stores/components";
+import SelectedMask from "../SelectMask";
 export function EditArea() {
-	const { components, addComponent } = useComponentsStore();
+	const { components,curComponentId,setCurComponentId } = useComponentsStore();
 	const { componentConfig } = useComponentConfigStore();
 
 	function renderComponents(components: Component[]): React.ReactNode {
@@ -39,6 +40,18 @@ export function EditArea() {
 			}
 		}
 	};
+	const handleClick:MouseEventHandler=(e)=>{
+		const path = e.nativeEvent.composedPath()
+		for(let i= 0;i<path.length;i++){
+			const ele = path[i] as HTMLElement
+
+			const componentId = ele.dataset.componentId
+			if(componentId){
+				setCurComponentId(+componentId)
+				return
+			}
+		}
+	}
 
 	return (
 		<div
@@ -47,14 +60,22 @@ export function EditArea() {
 			onMouseLeave={() => {
 				setHoverComponentId(undefined);
 			}}
+			onClick={handleClick}
 		>
 			{renderComponents(components)}
-			{hoverComponentId && (
+			{hoverComponentId && hoverComponentId!==curComponentId && (
 				<HoverMask
 					portalWrapperClassName="portal-wrapper"
 					containerClassName="edit-area"
 					componentId={hoverComponentId}
 				></HoverMask>
+			)}
+			{curComponentId&&(
+				 <SelectedMask
+				 portalWrapperClassName='portal-wrapper'
+				 containerClassName='edit-area'
+				 componentId={curComponentId}
+			 />
 			)}
 			<div className="portal-wrapper"></div>
 			{/* <pre>{JSON.stringify(components, null, 2)}</pre> */}

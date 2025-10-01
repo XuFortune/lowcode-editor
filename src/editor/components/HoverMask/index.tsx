@@ -26,6 +26,7 @@ function HoverMask({
 		updatePosition();
 	}, [componentId]);
 
+	
 	function updatePosition() {
 		if (!componentId) return;
 
@@ -56,6 +57,11 @@ function HoverMask({
 		return document.querySelector(`.${portalWrapperClassName}`);
 	}, []);
 	const { components } = useComponentsStore();
+
+	useEffect(()=>{
+		updatePosition()
+	},[components])
+
 	const curComponent = useMemo(() => {
 		return getComponentById(componentId, components);
 	}, [componentId]);

@@ -3,10 +3,11 @@ import { useDrag } from "react-dnd";
 
 export interface MaterialItemProps {
 	name: string;
+	desc:string;
 }
 
 export function MaterialItem(props: MaterialItemProps) {
-	const { name } = props;
+	const { name,desc } = props;
 
 	const ref = useRef(null);
 
@@ -35,7 +36,7 @@ export function MaterialItem(props: MaterialItemProps) {
     hover:bg-[#ccc]
 "
 		>
-			{name}
+			{desc}
 		</div>
 	);
 }

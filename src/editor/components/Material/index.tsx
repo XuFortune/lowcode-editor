@@ -13,7 +13,7 @@ export function Material() {
 		<div>
 			{components.map((item, index) => {
 				return (
-					<MaterialItem name={item.name} key={item.name + index}></MaterialItem>
+					<MaterialItem name={item.name} desc={item.desc} key={item.name + index}></MaterialItem>
 				);
 			})}
 		</div>
