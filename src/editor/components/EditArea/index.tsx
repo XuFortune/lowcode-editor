@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, type MouseEventHandler } from "react";
 import { useComponentConfigStore } from "../../stores/component-config";
 import { useComponentsStore } from "../../stores/components";
 import type { Component } from "../../stores/components";
@@ -25,8 +25,23 @@ export function EditArea() {
 			);
 		});
 	}
+
+	const [hoverComponentId, setHoverComponentId] = useState<number>();
+	const handleMouseOver: MouseEventHandler = (e) => {
+		const path = e.nativeEvent.composedPath();
+		for (let i = 0; i < path.length; i++) {
+			const ele = path[i] as HTMLElement;
+			const componentId = ele.dataset.componentId;
+			if (componentId) {
+				setHoverComponentId(+componentId);
+				return;
+			}
+		}
+	};
+
 	return (
-		<div className="h-[100%]">
+		<div className="h-[100%]" onMouseOver={handleMouseOver}>
+			{hoverComponentId}
 			{renderComponents(components)}
 			{/* <pre>{JSON.stringify(components, null, 2)}</pre> */}
 		</div>
