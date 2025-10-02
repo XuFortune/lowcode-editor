@@ -4,7 +4,7 @@ export interface Component {
 	id: number;
 	name: string;
 	props: any;
-	desc:string;
+	desc: string;
 	children?: Component[];
 	parentId?: number;
 }
@@ -18,10 +18,9 @@ interface State {
 interface Action {
 	addComponent: (component: Component, parentId?: number) => void;
 	deleteComponent: (componentId: number) => void;
-	updateComponent: (componentId: number, props: any) => void;
+	updateComponentProps: (componentId: number, props: any) => void;
 	setCurComponentId: (componentId: number | null) => void;
 }
-
 
 export const useComponentsStore = create<State & Action>((set, get) => ({
 	components: [
@@ -67,7 +66,7 @@ export const useComponentsStore = create<State & Action>((set, get) => ({
 			return { components: [...state.components] };
 		});
 	},
-	updateComponent: (componentId, props) => {
+	updateComponentProps: (componentId, props) => {
 		set((state) => {
 			const component = getComponentById(componentId, state.components);
 			if (component) {
