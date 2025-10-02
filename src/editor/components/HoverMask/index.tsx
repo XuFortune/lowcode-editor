@@ -26,7 +26,6 @@ function HoverMask({
 		updatePosition();
 	}, [componentId]);
 
-	
 	function updatePosition() {
 		if (!componentId) return;
 
@@ -58,9 +57,9 @@ function HoverMask({
 	}, []);
 	const { components } = useComponentsStore();
 
-	useEffect(()=>{
-		updatePosition()
-	},[components])
+	useEffect(() => {
+		updatePosition();
+	}, [components]);
 
 	const curComponent = useMemo(() => {
 		return getComponentById(componentId, components);
@@ -104,7 +103,7 @@ function HoverMask({
 						whiteSpace: "nowrap",
 					}}
 				>
-					{curComponent?.name}
+					{curComponent?.desc}
 				</div>
 			</div>
 		</>,
